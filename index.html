@@ -167,39 +167,101 @@
             background: #1a6b3c;
         }
 
-        .cert-bodies {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 16px;
+        .table-wrap {
+            overflow-x: auto;
             margin-top: 24px;
         }
 
-        .cert-card {
-            background: #fafaf9;
-            padding: 24px;
-            border-radius: 10px;
-            border: 1px solid #eae6e0;
-            transition: border-color 0.2s, box-shadow 0.2s;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
         }
 
-        .cert-card:hover {
-            border-color: #1a6b3c;
-            box-shadow: 0 4px 12px rgba(26,107,60,0.06);
-        }
-
-        .cert-card h4 {
-            color: #1a6b3c;
-            margin-bottom: 12px;
-            font-size: 1.1em;
-            font-weight: 600;
-        }
-
-        .cert-card ul {
-            margin-bottom: 8px;
-        }
-
-        .cert-card ul li::before {
+        thead {
             background: #1a6b3c;
+            color: white;
+        }
+
+        thead th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.85em;
+            letter-spacing: 0.03em;
+        }
+
+        thead th:first-child {
+            border-radius: 8px 0 0 0;
+        }
+
+        thead th:last-child {
+            border-radius: 0 8px 0 0;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #eae6e0;
+            transition: background 0.15s;
+        }
+
+        tbody tr:hover {
+            background: #f8f6f3;
+        }
+
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        tbody td {
+            padding: 16px;
+            vertical-align: top;
+            color: #3a3a4a;
+            line-height: 1.6;
+        }
+
+        tbody td:first-child {
+            white-space: nowrap;
+        }
+
+        .table-sub {
+            font-size: 0.8em;
+            color: #8a8a9a;
+            font-weight: 400;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .strict-tag {
+            background: #e8f5e9;
+            color: #1a6b3c;
+        }
+
+        .moderate-tag {
+            background: #fef7e0;
+            color: #8b6914;
+        }
+
+        .unknown-tag {
+            background: #f0efed;
+            color: #6b6b6b;
+        }
+
+        @media (max-width: 640px) {
+            thead th, tbody td {
+                padding: 12px 10px;
+                font-size: 0.85em;
+            }
+
+            tbody td:first-child {
+                white-space: normal;
+            }
         }
 
         .standards-container {
@@ -340,8 +402,8 @@
                 display: none;
             }
 
-            .cert-bodies {
-                grid-template-columns: 1fr;
+            .tag {
+                font-size: 0.75em;
             }
         }
     </style>
@@ -431,62 +493,51 @@
                 Understanding these differences helps consumers make informed choices aligned with their level of observance.
             </p>
 
-            <div class="cert-bodies">
-                <div class="cert-card">
-                    <h4>HMC (Halal Monitoring Committee)</h4>
-                    <p>
-                        Established in 2003, the HMC is known for its <strong>strict standards</strong>. They require:
-                    </p>
-                    <ul>
-                        <li>Hand slaughter by trained Muslim slaughtermen</li>
-                        <li>No stunning of animals before slaughter</li>
-                        <li>Prayer said over every animal</li>
-                        <li>Complete segregation from non-halal products</li>
-                    </ul>
-                    <p>HMC is widely recognized and trusted among Muslims seeking the strictest halal standards.</p>
-                </div>
-
-                <div class="cert-card">
-                    <h4>HFA (Halal Food Authority)</h4>
-                    <p>
-                        Founded in 1994, the HFA is one of the oldest certification bodies in the UK. They:
-                    </p>
-                    <ul>
-                        <li>Accept certain forms of pre-slaughter stunning (reversible stunning that doesn't kill the animal)</li>
-                        <li>Require Muslim slaughtermen</li>
-                        <li>Require prayer to be said over the animals</li>
-                        <li>Conduct regular audits and inspections</li>
-                    </ul>
-                    <p>HFA certifies many major food suppliers and restaurants in the UK.</p>
-                </div>
-
-                <div class="cert-card">
-                    <h4>Halal Certification Europe (HCE)</h4>
-                    <p>
-                        An international body with UK operations:
-                    </p>
-                    <ul>
-                        <li>Uses electronic monitoring systems</li>
-                        <li>Accepts stunning in some cases</li>
-                        <li>Provides certification for various product categories</li>
-                        <li>Focuses on transparency and traceability</li>
-                    </ul>
-                </div>
-
-                <div class="cert-card">
-                    <h4>Halal Certification UK (HCUK)</h4>
-                    <p>
-                        Another certification body offering:
-                    </p>
-                    <ul>
-                        <li>Certification for food products and restaurants</li>
-                        <li>Various levels of certification based on client needs</li>
-                        <li>Regular auditing and compliance checks</li>
-                    </ul>
-                </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Body</th>
+                            <th>Founded</th>
+                            <th>Stunning Policy</th>
+                            <th>Slaughter</th>
+                            <th>Key Feature</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>HMC</strong><br><span class="table-sub">Halal Monitoring Committee</span></td>
+                            <td>2003</td>
+                            <td><span class="tag strict-tag">No stunning</span></td>
+                            <td>Hand slaughter by trained Muslim slaughtermen; prayer over every animal</td>
+                            <td>Complete segregation from non-halal; trusted for strictest standards</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HFA</strong><br><span class="table-sub">Halal Food Authority</span></td>
+                            <td>1994</td>
+                            <td><span class="tag moderate-tag">Accepts reversible stunning</span></td>
+                            <td>Muslim slaughtermen required; prayer required</td>
+                            <td>Oldest UK body; certifies major food suppliers and restaurants</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HCE</strong><br><span class="table-sub">Halal Certification Europe</span></td>
+                            <td>&mdash;</td>
+                            <td><span class="tag moderate-tag">Accepts in some cases</span></td>
+                            <td>Accepts various methods with electronic monitoring</td>
+                            <td>Focus on transparency, traceability, and tech-driven oversight</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HCUK</strong><br><span class="table-sub">Halal Certification UK</span></td>
+                            <td>&mdash;</td>
+                            <td><span class="tag unknown-tag">Varies</span></td>
+                            <td>Offers multiple certification levels based on client needs</td>
+                            <td>Flexible certification tiers; regular auditing and compliance checks</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <p style="margin-top: 20px;">
+            <p style="margin-top: 24px;">
                 <strong>Note:</strong> When shopping or dining out, it's important to check which certification body
                 has approved a product or establishment, as standards can vary. Many Muslims prefer HMC certification
                 for meat products due to their strict no-stunning policy.
